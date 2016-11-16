@@ -21,10 +21,13 @@
 #include "fit_only_3x4.h"
 
 #include "benchmark.h"
-#include "halide_image.h"
+#include "Halide.h"
 #include "halide_image_io.h"
 
-using namespace Halide::Tools;
+using namespace Halide;
+using namespace Halide::Internal;
+
+// using namespace Halide::Tools;
 
 int main(int argc, char **argv) {
 
@@ -33,16 +36,16 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    Image<float> low_res_in = load_image(argv[1]);
-    Image<float> low_res_out = load_image(argv[2]);
-    Image<float> high_res_in = load_image(argv[3]);
+    Image<float> low_res_in = Tools::load_image(argv[1]);
+    Image<float> low_res_out = Tools::load_image(argv[2]);
+    Image<float> high_res_in = Tools::load_image(argv[3]);
     Image<float> high_res_out(high_res_in.width(), high_res_in.height(), high_res_in.channels());
     float r_sigma = 1.0f/atoi(argv[5]);
     float s_sigma = atoi(argv[6]);
 
     // Fit the curves and slice out the result.
     bgu_3x4(r_sigma, s_sigma, low_res_in, low_res_out, high_res_in, high_res_out);
-    save_image(high_res_out, argv[4]);
+    Tools::save_image(high_res_out, argv[4]);
 
     // You'd normally slice out the result using a shader. Check the
     // runtime of curve fitting alone.

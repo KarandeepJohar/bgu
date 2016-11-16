@@ -20,11 +20,13 @@
 #include "bgu_1x4.h"
 #include "fit_only_1x4.h"
 
+#include "Halide.h"
 #include "benchmark.h"
-#include "halide_image.h"
 #include "halide_image_io.h"
 
+using namespace Halide;
 using namespace Halide::Tools;
+using namespace Halide::Internal;
 
 int main(int argc, char **argv) {
 

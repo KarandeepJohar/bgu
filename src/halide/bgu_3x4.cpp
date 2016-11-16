@@ -470,10 +470,10 @@ int main(int argc, char **argv) {
         .vectorize(c, 4);
 
     // Compile a version that does the slicing.
-    slice.compile_to_file("bgu_3x4", {r_sigma, s_sigma, splat_loc, values, slice_loc}, target);
+    slice.compile_to_file("bgu_3x4", {r_sigma, s_sigma, splat_loc, values, slice_loc}, "bgu_3x4", target);
 
     // Compile a version that just does the fitting. Use this with the GL shader.
-    line.compile_to_file("fit_only_3x4", {r_sigma, s_sigma, splat_loc, values, slice_loc}, target);
+    line.compile_to_file("fit_only_3x4", {r_sigma, s_sigma, splat_loc, values, slice_loc}, "fit_only_3x4",  target);
 
     return 0;
 }
